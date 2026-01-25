@@ -142,7 +142,7 @@ if has("gui_running")
 	set guioptions-=L   " ditto
 	set guioptions-=R   " disable GUI right scrollbar
 	set guioptions-=r   " ditto
-	set columns=176     " about 2 screens wide, plus enough for extras
+	set columns=180     " about 2 screens wide, plus enough for extras
 endif
 set number                " enable line numbers
 set nowrap                " disable line wrapping
