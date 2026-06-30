@@ -5,7 +5,7 @@ set backspace=indent,eol,start
 " syntax highlighting -------------------------------------------------------@/
 au BufRead,BufNewFile *.tra    setfiletype terra       " terra language
 au BufRead,BufNewFile *.inc    setfiletype asm         " .inc is only for ASM
-au BufRead,BufNewFile *.dmg    setfiletype asm         " SM83 assembly
+au BufRead,BufNewFile *.dmg    setfiletype z80         " ;
 au BufRead,BufNewFile *.sx     setfiletype asm         " GNU assembly
 au BufRead,BufNewFile *.bsa    setfiletype c           " near's bass assembler
 
@@ -44,6 +44,10 @@ call plug#begin()
 	Plug 'preservim/vim-markdown'
 	Plug 'ap/vim-css-color'
 	Plug 'suwacrab/BetterLua.vim'
+	Plug 'suwacrab/vim-z80'
+	Plug 'dpc/vim-armasm'
+	Plug 'junegunn/goyo.vim'
+
 	" colorschemes --------------------------------------@/
 	Plug 'cocopon/iceberg.vim'
 	Plug 'morhetz/gruvbox'
@@ -115,6 +119,8 @@ else
 	set list lcs=tab:\│\ 
 endif
 "endif
+
+set list lcs=tab:\ \ \ 
 
 " gvim --------------------------------------------------@/
 if has('win32')
