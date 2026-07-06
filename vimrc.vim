@@ -10,11 +10,11 @@ au BufRead,BufNewFile *.sx     setfiletype asm         " GNU assembly
 au BufRead,BufNewFile *.bsa    setfiletype c           " near's bass assembler
 
 " cpp setup -----------------------------------------------------------------@/
-let g:cpp_function_highlight = 0
+let g:cpp_function_highlight = 1
 let g:cpp_attributes_highlight = 1
 let g:cpp_member_highlight = 1
 let g:cpp_simple_highlight = 0
-let g:cpp_type_name_highlight = 0
+let g:cpp_type_name_highlight = 1
 let g:cpp_posix_standard = 1 " enable highlighting of posix fns
 let g:cpp_class_decl_highlight = 1
 let g:cpp_class_scope_highlight = 1
