@@ -8,6 +8,11 @@ local lualine_ext = {
 	filetypes = { 'tagbar' };
 }
 
+--[[
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+]]
+
 require('nvim-tree').setup()
 require('nvim-web-devicons').setup()
 require('lualine').setup({

@@ -73,6 +73,9 @@ augroup javascript_folding
 augroup END
 let g:javaScript_fold=1
 
+" rust setup --------------------------------------------@/
+let g:rust_recommended_style = v:false
+
 " airline config ----------------------------------------@/
 let s:line_sepL = ''
 let s:line_sepR = ''
@@ -132,6 +135,11 @@ endif
 " tagbar ------------------------------------------------@/
 nmap <F8> :TagbarToggle<CR>
 let g:tagbar_show_data_type = 1
+if has('win32')
+
+else
+	nmap <F9> :NvimTreeToggle<CR>
+endif
 
 " misc ----------------------------------------------------------------------@/
 set termguicolors
@@ -169,6 +177,7 @@ set colorcolumn=80     " after 80 columns, show red bar
 set nocursorcolumn     " no veritcal cursor visual
 
 :noh " clear highlighting, just in case
+" :NvimTreeOpen
 
 " neovide-only config -------------------------------------------------------@/
 if exists("g:neovide")
