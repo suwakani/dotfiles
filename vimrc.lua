@@ -8,6 +8,11 @@ local lualine_ext = {
 	filetypes = { 'tagbar' };
 }
 
+--[[
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+]]
+
 require('nvim-tree').setup()
 require('nvim-web-devicons').setup()
 require('lualine').setup({
@@ -22,7 +27,9 @@ require('lualine').setup({
 		lualine_c = {'filename'};
 		lualine_x = {'encoding'; 'fileformat'; 'filetype'};
 		lualine_y = {'progress'};
-		lualine_z = {'location'};
+		lualine_z = { 
+			{ '%3l:%-2.(%c[%v]%)', type = 'stl' };
+		};
 	};
 	extensions = { lualine_ext };
 })

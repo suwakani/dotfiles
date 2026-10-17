@@ -5,16 +5,16 @@ set backspace=indent,eol,start
 " syntax highlighting -------------------------------------------------------@/
 au BufRead,BufNewFile *.tra    setfiletype terra       " terra language
 au BufRead,BufNewFile *.inc    setfiletype asm         " .inc is only for ASM
-au BufRead,BufNewFile *.dmg    setfiletype asm         " SM83 assembly
+au BufRead,BufNewFile *.dmg    setfiletype z80         " ;
 au BufRead,BufNewFile *.sx     setfiletype asm         " GNU assembly
 au BufRead,BufNewFile *.bsa    setfiletype c           " near's bass assembler
 
 " cpp setup -----------------------------------------------------------------@/
-let g:cpp_function_highlight = 0
+let g:cpp_function_highlight = 1
 let g:cpp_attributes_highlight = 1
 let g:cpp_member_highlight = 1
 let g:cpp_simple_highlight = 0
-let g:cpp_type_name_highlight = 0
+let g:cpp_type_name_highlight = 1
 let g:cpp_posix_standard = 1 " enable highlighting of posix fns
 let g:cpp_class_decl_highlight = 1
 let g:cpp_class_scope_highlight = 1
@@ -44,6 +44,10 @@ call plug#begin()
 	Plug 'preservim/vim-markdown'
 	Plug 'ap/vim-css-color'
 	Plug 'suwacrab/BetterLua.vim'
+	Plug 'suwacrab/vim-z80'
+	Plug 'dpc/vim-armasm'
+	Plug 'junegunn/goyo.vim'
+
 	" colorschemes --------------------------------------@/
 	Plug 'cocopon/iceberg.vim'
 	Plug 'morhetz/gruvbox'
@@ -69,6 +73,9 @@ augroup javascript_folding
 augroup END
 let g:javaScript_fold=1
 
+" rust setup --------------------------------------------@/
+let g:rust_recommended_style = v:false
+
 " airline config ----------------------------------------@/
 let s:line_sepL = ''
 let s:line_sepR = ''
@@ -90,11 +97,9 @@ endif
 let g:airline_symbols.linenr=''
 "let g:airline_symbols.maxlinenr=''
 
-
-
 " markdown ----------------------------------------------@/
 let g:vim_markdown_folding_disabled = 1
-let g:vim_markdown_fenced_languages= ['c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini', 'c']
+let g:vim_markdown_fenced_languages= ['c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini', 'lua=lua', 'c']
 " let g:vim_markdown_fenced_languages= ['c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini']
 
 " fastfold ----------------------------------------------@/
@@ -118,6 +123,8 @@ else
 endif
 "endif
 
+set list lcs=tab:\ \ \ 
+
 " gvim --------------------------------------------------@/
 if has('win32')
 	if has('gui_running')
@@ -128,12 +135,17 @@ endif
 " tagbar ------------------------------------------------@/
 nmap <F8> :TagbarToggle<CR>
 let g:tagbar_show_data_type = 1
+if has('win32')
+
+else
+	nmap <F9> :NvimTreeToggle<CR>
+endif
 
 " misc ----------------------------------------------------------------------@/
 set termguicolors
 set t_Co=256
-set background=dark
-colorscheme gruvbox
+set background=light
+colorscheme stella
 let g:airline_theme="gruvbox"
 set guifont=tewi:h8
 if has("gui_running")
@@ -144,7 +156,7 @@ if has("gui_running")
 	set guioptions-=L   " ditto
 	set guioptions-=R   " disable GUI right scrollbar
 	set guioptions-=r   " ditto
-	set columns=176     " about 2 screens wide, plus enough for extras
+	set columns=180     " about 2 screens wide, plus enough for extras
 endif
 set number                " enable line numbers
 set nowrap                " disable line wrapping
@@ -165,6 +177,7 @@ set colorcolumn=80     " after 80 columns, show red bar
 set nocursorcolumn     " no veritcal cursor visual
 
 :noh " clear highlighting, just in case
+" :NvimTreeOpen
 
 " neovide-only config -------------------------------------------------------@/
 if exists("g:neovide")
