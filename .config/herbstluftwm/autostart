@@ -21,6 +21,7 @@ hc keyunbind --all
 Mod=Mod4   # Use the super key as the main modifier
 
 hc keybind $Mod-Shift-s spawn shutter -s
+hc keybind $Mod-Shift-Alt-s spawn shutter -full
 hc keybind $Mod-Shift-q quit
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-Shift-c close
@@ -30,12 +31,14 @@ hc keybind $Mod-Return spawn "${TERMINAL:-xterm}" # use your $TERMINAL with xter
 
 # lighting
 XBRIGHT_OUTPUT=eDP1
+XBRIGHT_XLO=0.05
 XBRIGHT_LO=0.3
 XBRIGHT_HI=1
 XBRIGHT_DF=$XBRIGHT_HI
 xrandr --output $XBRIGHT_OUTPUT --brightness $XBRIGHT_HI
 hc keybind $Mod-Shift-o spawn xrandr --output $XBRIGHT_OUTPUT --brightness $XBRIGHT_LO
 hc keybind $Mod-Shift-p spawn xrandr --output $XBRIGHT_OUTPUT --brightness $XBRIGHT_HI
+hc keybind $Mod-Shift-i spawn xrandr --output $XBRIGHT_OUTPUT --brightness $XBRIGHT_XLO
 hc keybind $Mod-Shift-l spawn picom --backend glx -b --config ~/.config/herbstluftwm/picom
 hc keybind $Mod-Shift-k spawn pkill picom
 
@@ -137,10 +140,11 @@ hc set frame_gap 8
 
 # tab_color & active.inner_color: color of picked tab
 # normal.color: color of unpicked tab (ungrouped)
+# 'theme.title_when' can be 'never', 'multiple_tabs', or 'always'
 
 hc attr theme.title_height 13
 hc attr theme.title_align center
-hc attr theme.title_when multiple_tabs
+hc attr theme.title_when always
 # hc attr theme.title_font 'Dejavu Sans:pixelsize=12'  # example using Xft
 # hc attr theme.title_font '-*-noto serif cjk jp-*-*-*-*-12-*-*-*-*-*-*-*'
 # hc attr theme.title_font 'wenquanyi:size=9'

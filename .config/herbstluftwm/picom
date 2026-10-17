@@ -23,29 +23,36 @@ rules = (
 		dim = 0.6;
 	},
 	{
-		# bar
+		# inactive drawpile window
+		match = "class_g='drawpile' && !focused";
+		dim = 0.0;
+		opacity = 1.0;
+	},
+	{
+		# barif they come out the right side of the screen and move left
 		match = "class_i='lemonbar' && !focused";
 		dim = 0.0;
 		opacity = 0.85;
-		shadow = false;
+		shadow = true;
+		corner-radius: 0;
 	},
 );
 
 backend = "glx";
 vsync = true;
-glx-no-stencil = true;
-glx-copy-from-front = false;
-glx-no-rebind-pixmap = true;
-inactive-dim = 0.8;
-corner-radius: 10;
+# glx-no-stencil = true;
+# glx-copy-from-front = false;
+# glx-no-rebind-pixmap = true;
+# inactive-dim = 0.8;
+corner-radius: 4;
 use-damage = true;
 
 # shadows -------------------------------------------------------------------@/
 shadow = true;
-shadow-radius: 6;
-shadow-opacity: .8;
-shadow-offset-x: -2;
-shadow-offset-y: -2;
+shadow-radius: 9;
+shadow-opacity: .6;
+shadow-offset-x: -5;
+shadow-offset-y: -5;
 shadow-color: "#200115";
 
 blur: {
@@ -53,4 +60,12 @@ blur: {
 	strength = 2.3;
 	deviation = 1.0;
 };
+
+#animations = (
+#	{
+#		triggers = ["open", "show","geometry"];
+#		preset = "geometry-change";
+#		duration = 0.2;
+#	}
+#);
 

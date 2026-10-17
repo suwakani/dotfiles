@@ -46,10 +46,17 @@ MONITOR_SIZEX = tonumber(MONITOR_SIZEX)
 MONITOR_SIZEY = tonumber(MONITOR_SIZEY)
 
 local BAR_WIDTH = MONITOR_SIZEX - 16
-local BAR_HEIGHT = 18
-local BAR_X = (MONITOR_SIZEX-BAR_WIDTH) / 2
+local BAR_HEIGHT = 30
 local BAR_Y = 8
 local MONITOR_ID = 0
+
+local WIDE_MODE = false;
+if WIDE_MODE then
+	BAR_WIDTH = MONITOR_SIZEX;
+	BAR_Y = 0;
+end
+
+local BAR_X = (MONITOR_SIZEX-BAR_WIDTH) / 2
 
 -- setup theme --------------------------------------------------------------@/
 local PALETTE_BASE = {
@@ -90,8 +97,25 @@ local PALETTE_LITE = {
 		}
 	};
 }
+local PALETTE_V2 = {
+	fg = PALETTE_BASE.fg;
+	fgSel = '#EF6060';
+	fgLight = PALETTE_BASE.fgLight;
+	bg = PALETTE_BASE.bg;
+	herbtheme = {
+		colors = {
+			border = '_FGSEL';
+			border_unsel = '#606060';
+			border_real = '#101010';
+			tab_text = '#202020';
+		};
+		misc = {
+			border_width = 1;
+		}
+	};
+}
 
-local PALETTE = PALETTE_DARK
+local PALETTE = PALETTE_V2
 --PALETTE = PALETTE_LITE
 
 do
@@ -99,13 +123,15 @@ do
 	if pal.herbtheme then
 		local theme = pal.herbtheme
 		local names = {
-			border = { 'theme.active.color', 'theme.active.inner_color', 'theme.active.outer_color' };
+			border = { 'theme.active.color', 'theme.active.inner_color' };
 			border_unsel = { 'theme.normal.color', 'theme.normal.inner_color', 'theme.normal.outer_color' };
+			border_real = { 'theme.active.outer_color' };
+			border_width = { 'theme.border_width', 'theme.floating.border_width' };
 			tab_text = 'theme.tab_color';
-			border_width = { 'theme.border_width', 'theme.floating.border_width' }
 		}
 		local clrmap = {
 			_FG = pal.fg;
+			_FGSEL = pal.fgSel;
 			_BG = pal.bg;
 		}
 		local all_list = {
@@ -355,6 +381,10 @@ while true do
 		end
 	end
 
+	textmode_fglightSet()
+	textmode_appendf(" |")
+	textmode_fgReset()
+
 	-- write window title -------------------------------@/
 	textmode_append("%{T-}")
 	textmode_fglightSet()
@@ -480,7 +510,7 @@ while true do
 		textmode_fgReset()
 		textmode_appendf("%s ",date.ymd)
 		textmode_fgalterSet()
-		textmode_appendf("%s (%s)",date.time,date.day)
+		textmode_appendf("%s %s",date.time,date.day)
 		textmode_fgReset()
 		textmode_append("")
 	end
