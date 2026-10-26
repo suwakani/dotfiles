@@ -13,8 +13,8 @@ rules = (
 	{
 		# inactive window
 		match = "!focused";
-		dim = 0.6;
-		opacity = 0.98;
+		dim = 0.5;
+		opacity = 0.9;
 		blur-background = false;
 	},
 	{
@@ -32,10 +32,16 @@ rules = (
 		# barif they come out the right side of the screen and move left
 		match = "class_i='lemonbar' && !focused";
 		dim = 0.0;
-		opacity = 0.85;
+		opacity = 0.7;
 		shadow = true;
 		corner-radius: 0;
 	},
+	{
+		# inactive dunst window
+		match = "class_g='Dunst' && !focused";
+		dim = 0.0;
+		opacity = 0.5;
+	}
 );
 
 backend = "glx";

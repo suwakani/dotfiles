@@ -46,7 +46,7 @@ MONITOR_SIZEX = tonumber(MONITOR_SIZEX)
 MONITOR_SIZEY = tonumber(MONITOR_SIZEY)
 
 local BAR_WIDTH = MONITOR_SIZEX - 16
-local BAR_HEIGHT = 30
+local BAR_HEIGHT = 29
 local BAR_Y = 8
 local MONITOR_ID = 0
 
@@ -185,16 +185,74 @@ execf("herbstclient pad %s %d",MONITOR_ID,
 execa('pkill lemonbar')
 
 -- setup background ---------------------------------------------------------@/
-do
+math.randomseed(os.time())
+local wallpaperID = nil
+local function wallpaper_change()
 	local bg_table = {
-	--	"/home/suwa/km/art/other/usa_senzoc_01.png";
-		"/home/suwa/km/art/other/usa_konchaboy_02.png";
-		"/home/suwa/km/art/other/wall00.png";
-		"/home/suwa/km/art/other/chun_lanlan_moriyas.jpg";
+	--[[
+		{ "/home/suwa/km/art/other/chun_lanlan_moriyas.jpg"; "scale" };
+		{ "/home/suwa/km/art/other/usa_konchaboy_02.png"; "scale" };
+		{ "/home/suwa/km/art/other/wall00.png"; "scale" };
+	]]
+		{ "/mnt/windisc/KM-20/jp/BBS/2ch/ref/e/anon/2023/02 February.png"; "max" };
+
+		{ "/mnt/windisc/KM-20/art/other/wall/bejeweled/cetialphav.jpg"; "scale" };
+		{ "/mnt/windisc/KM-20/art/other/wall/bejeweled/channondoa.jpg"; "scale" };
+		{ "/mnt/windisc/KM-20/art/other/wall/bejeweled/dorsalminor.jpg"; "scale" };
+		{ "/mnt/windisc/KM-20/art/other/wall/bejeweled/gaeanreach.jpg"; "scale" };
+		{ "/mnt/windisc/KM-20/art/other/wall/bejeweled/gammacore.jpg"; "scale" };
+		{ "/mnt/windisc/KM-20/art/other/wall/bejeweled/hegemonv.jpg"; "scale" };
+		{ "/mnt/windisc/KM-20/art/other/wall/bejeweled/maya3.jpg"; "scale" };
+		{ "/mnt/windisc/KM-20/art/other/wall/bejeweled/moodyblue_275.jpg"; "scale" };
+		{ "/mnt/windisc/KM-20/art/other/wall/bejeweled/sequentusbeta.jpg"; "scale" };
+		{ "/mnt/windisc/KM-20/art/other/wall/bejeweled/seraph.jpg"; "scale" };
+		{ "/mnt/windisc/KM-20/art/other/wall/bejeweled/tauheximus.jpg"; "scale" };
+		{ "/mnt/windisc/KM-20/art/other/wall/bejeweled/toroidx.jpg"; "scale" };
+		{ "/mnt/windisc/KM-20/art/other/wall/bejeweled/zendrop2.jpg"; "scale" };
+
+		{ "/mnt/windisc/KM-20/jp/BBS/2ch/ref/gen/_pxv52472_マサリロ_421521_p000.jpg"; "fill" };
+		{ "/mnt/windisc/KM-20/jp/BBS/2ch/ref/gen/_pxv52472_マサリロ_505516_p000.jpg"; "fill" };
+		{ "/mnt/windisc/KM-20/jp/BBS/2ch/ref/gen/_pxv52472_マサリロ_1050864_p000.jpg"; "fill" };
+		{ "/mnt/windisc/KM-20/jp/BBS/2ch/ref/gen/_pxv52472_マサリロ_2540245_p000.jpg"; "fill" };
+		{ "/mnt/windisc/KM-20/jp/BBS/2ch/ref/gen/_pxv52472_マサリロ_5151552_p000.jpg"; "center" };
+		{ "/mnt/windisc/KM-20/jp/BBS/2ch/ref/gen/_pxv52472_マサリロ_7506978_p000.jpg"; "fill" };
+		{ "/mnt/windisc/KM-20/jp/BBS/2ch/ref/gen/_pxv52472_マサリロ_8148296_p000.jpg"; "fill" };
+		{ "/mnt/windisc/KM-20/jp/BBS/2ch/ref/gen/_pxv52472_マサリロ_9556639_p000.jpg"; "fill" };
+		{ "/mnt/windisc/KM-20/jp/BBS/2ch/ref/gen/_pxv52472_マサリロ_11762640_p000.jpg"; "fill" };
+		{ "/mnt/windisc/KM-20/jp/BBS/2ch/ref/gen/_pxv52472_マサリロ_12953404_p000.jpg"; "fill" };
+		{ "/mnt/windisc/KM-20/jp/BBS/2ch/ref/gen/_pxv52472_マサリロ_13357904_p000.jpg"; "fill" };
+		{ "/mnt/windisc/KM-20/jp/BBS/2ch/ref/gen/_pxv52472_マサリロ_15279629_p000.jpg"; "fill" };
+		{ "/mnt/windisc/KM-20/jp/BBS/2ch/ref/gen/_pxv52472_マサリロ_32696481_p000.jpg"; "fill" };
+		{ "/mnt/windisc/KM-20/jp/BBS/2ch/ref/gen/_pxv52472_マサリロ_50645798_p000.jpg"; "fill" };
+		{ "/mnt/windisc/KM-20/jp/BBS/2ch/ref/gen/_pxv91521_bob_2849778_p000.jpg"; "fill" };
+		{ "/mnt/windisc/KM-20/jp/BBS/2ch/ref/gen/_pxv100284_創-taro（So-taro）_9340445_p0.png"; "fill" };
+		{ "/mnt/windisc/KM-20/jp/BBS/2ch/ref/gen/_pxv969864_whitebear_108922192_p000.png"; "fill" };
+		{ "/mnt/windisc/KM-20/jp/BBS/2ch/ref/gen/_pxv4819066_T5_108988374_p000.jpg"; "fill" };
+		{ "/mnt/windisc/KM-20/jp/BBS/2ch/ref/gen/_pxv4819066_T5_112415061_p000.jpg"; "fill" };
+		{ "/mnt/windisc/KM-20/jp/BBS/2ch/ref/gen/minnnnnnnim_twt2023-12-26_1739609087917310000_1.jpg"; "fill" };
 	}
-	math.randomseed(os.time())
-	local bg = bg_table[math.random(1,#bg_table)]
-	execf('feh --bg-scale %s',bg)
+	local entryID = math.random(1,#bg_table)
+	if wallpaperID then
+		if entryID == wallpaperID then
+			entryID = entryID+1;
+			if entryID > #bg_table then
+				entryID = 1
+			end
+		end
+	end
+	local entry = bg_table[entryID]
+	local path,type = entry[1],entry[2]
+	local typelut = {
+		scale = "bg-scale";
+		center = "bg-center";
+		max = "bg-max";
+		tile = "bg-tile";
+		fill = "bg-fill";
+	}
+	assert(typelut[type])
+	type = typelut[type];
+	execf('feh --%s "%s"', type, path)
+	wallpaperID = entryID
 end
 
 -- write to bar
@@ -254,8 +312,27 @@ end
 local titlescroll = ScrollableTxt_new(30,6,20,4)
 local notifscroll = ScrollableTxt_new(30,6,16,3)
 
+local wallpaper_changeLast = clock()
+local wallpaper_changeInterval = 60 * 25
+local wallpaper_changeEnable = true
+wallpaper_change()
+
 while true do
 	is_halftick = not is_halftick
+	
+	-- check wallpaper ----------------------------------@/
+	if wallpaper_changeEnable then
+		local cl = clock()
+		local distance = cl - wallpaper_changeLast
+		if distance >= wallpaper_changeInterval then
+			print('change.', cl,wallpaper_changeLast)
+			while cl - wallpaper_changeLast >= wallpaper_changeInterval do
+				wallpaper_changeLast = wallpaper_changeLast + wallpaper_changeInterval
+			end
+			wallpaper_change()
+		end
+	end
+
 	-- check herbstluft events --------------------------@/
 	do
 		-- read lines to memory -------------------------@/
@@ -448,9 +525,10 @@ while true do
 	do
 		local mem_cur = tonumber(popen_readFixed('free -m | awk \'/Mem:/ { printf("%3.1f%%", $3) }\''))
 		local mem_cent = (mem_cur / mem_max)
-		local text = ("%.1fG / %.1fG (%.1f%%)"):format(mem_cur/1024,mem_max/1024,mem_cent*100)
+		local text = ("%.1fG / %.1fG (%.2f%%)"):format(mem_cur/1024,mem_max/1024,mem_cent*100)
 		if mem_cent >= 0.81 then
 			execa('pkill firefox -9')
+			execa('pkill Discord -9')
 		end
 		if mem_cent >= 0.70 then
 			local warning_str = "[!!!] " or " "

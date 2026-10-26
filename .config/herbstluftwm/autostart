@@ -30,15 +30,23 @@ hc keybind $Mod-t spawn urxvt # spawn alt terminal
 hc keybind $Mod-Return spawn "${TERMINAL:-xterm}" # use your $TERMINAL with xterm as fallback
 
 # lighting
-XBRIGHT_OUTPUT=eDP1
-XBRIGHT_XLO=0.05
-XBRIGHT_LO=0.3
-XBRIGHT_HI=1
+#XBRIGHT_OUTPUT=eDP1
+#XBRIGHT_XLO=0.05
+#XBRIGHT_LO=0.3
+#XBRIGHT_HI=1
+#XBRIGHT_DF=$XBRIGHT_HI
+#xrandr --output $XBRIGHT_OUTPUT --brightness $XBRIGHT_HI
+#hc keybind $Mod-Shift-o spawn xrandr --output $XBRIGHT_OUTPUT --brightness $XBRIGHT_LO
+#hc keybind $Mod-Shift-p spawn xrandr --output $XBRIGHT_OUTPUT --brightness $XBRIGHT_HI
+#hc keybind $Mod-Shift-i spawn xrandr --output $XBRIGHT_OUTPUT --brightness $XBRIGHT_XLO
+XBRIGHT_XLO=2%
+XBRIGHT_LO=30%
+XBRIGHT_HI=100%
 XBRIGHT_DF=$XBRIGHT_HI
-xrandr --output $XBRIGHT_OUTPUT --brightness $XBRIGHT_HI
-hc keybind $Mod-Shift-o spawn xrandr --output $XBRIGHT_OUTPUT --brightness $XBRIGHT_LO
-hc keybind $Mod-Shift-p spawn xrandr --output $XBRIGHT_OUTPUT --brightness $XBRIGHT_HI
-hc keybind $Mod-Shift-i spawn xrandr --output $XBRIGHT_OUTPUT --brightness $XBRIGHT_XLO
+brightnessctl set $XBRIGHT_HI
+hc keybind $Mod-Shift-i spawn brightnessctl set $XBRIGHT_XLO
+hc keybind $Mod-Shift-o spawn brightnessctl set $XBRIGHT_LO
+hc keybind $Mod-Shift-p spawn brightnessctl set $XBRIGHT_HI
 hc keybind $Mod-Shift-l spawn picom --backend glx -b --config ~/.config/herbstluftwm/picom
 hc keybind $Mod-Shift-k spawn pkill picom
 

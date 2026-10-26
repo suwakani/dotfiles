@@ -139,6 +139,7 @@ if has('win32')
 
 else
 	nmap <F9> :NvimTreeToggle<CR>
+	nmap <F7> :hi Normal guibg=NONE<CR>
 endif
 
 " misc ----------------------------------------------------------------------@/
@@ -208,6 +209,8 @@ endif
 
 " linux settings ------------------------------------------------------------@/
 if !has('win32')
+	set background=dark
+	colo stella
 	hi Normal guibg=NONE
 endif
 
