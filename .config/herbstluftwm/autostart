@@ -39,8 +39,8 @@ hc keybind $Mod-Return spawn "${TERMINAL:-xterm}" # use your $TERMINAL with xter
 #hc keybind $Mod-Shift-o spawn xrandr --output $XBRIGHT_OUTPUT --brightness $XBRIGHT_LO
 #hc keybind $Mod-Shift-p spawn xrandr --output $XBRIGHT_OUTPUT --brightness $XBRIGHT_HI
 #hc keybind $Mod-Shift-i spawn xrandr --output $XBRIGHT_OUTPUT --brightness $XBRIGHT_XLO
-XBRIGHT_XLO=2%
-XBRIGHT_LO=30%
+XBRIGHT_XLO=1%
+XBRIGHT_LO=19%
 XBRIGHT_HI=100%
 XBRIGHT_DF=$XBRIGHT_HI
 brightnessctl set $XBRIGHT_HI
@@ -139,11 +139,9 @@ hc attr theme.floating.reset 1
 hc set frame_border_active_color '#222222cc'
 hc set frame_border_normal_color '#101010cc'
 hc set frame_bg_normal_color '#565656aa'
-hc set frame_bg_active_color '#345F0Caa'
-hc set frame_border_width 0
-hc set show_frame_decorations if_empty
+hc set frame_bg_active_color '#606060aa'
+hc set show_frame_decorations focused
 hc set frame_bg_transparent on
-hc set frame_transparent_width 1
 hc set frame_gap 8
 
 # tab_color & active.inner_color: color of picked tab
@@ -160,23 +158,35 @@ hc attr theme.title_when always
 # hc attr theme.title_font 'Terminus:size=9'
 hc attr theme.title_font 'tewi:size=8'
 hc attr theme.title_depth 3  # space below the title's baseline
-hc attr theme.active.color '#C78195'
 hc attr theme.title_color '#000000'
-hc attr theme.normal.color '#454545dd'
 hc attr theme.urgent.color '#7811A1dd'
 hc attr theme.tab_color '#202020'
 hc attr theme.active.tab_color '#606060'
 hc attr theme.active.tab_title_color '#ffffff'
 hc attr theme.normal.title_color '#A76175'
-hc attr theme.inner_width 0
-hc attr theme.inner_color black
-hc attr theme.border_width 1
 hc attr theme.floating.border_width 1
 hc attr theme.floating.outer_width 1
 hc attr theme.floating.outer_color black
+hc attr theme.normal.inner_color '#808080'
+
+# the FRAME BORDER is what's around each frame.
+# the OUTER BORDER is essentially the border for the outside bits.
+
+# inner border
+hc attr theme.inner_width 2
 hc attr theme.active.inner_color '#C78195'
 hc attr theme.urgent.inner_color '#9A65B0'
-hc attr theme.normal.inner_color '#606060'
+hc attr theme.inner_color black
+
+# outer border
+hc attr theme.border_width 1
+hc attr theme.active.color '#C78195'
+hc attr theme.normal.color '#454545dd'
+
+# frame border
+hc set frame_border_width 1
+hc set frame_border_active_color black
+
 # copy inner color to outer_color
 for state in active urgent normal ; do
     hc substitute C theme.${state}.inner_color \

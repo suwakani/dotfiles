@@ -50,8 +50,9 @@ vsync = true;
 # glx-copy-from-front = false;
 # glx-no-rebind-pixmap = true;
 # inactive-dim = 0.8;
-corner-radius: 4;
+# corner-radius: 1;
 use-damage = true;
+crop-shadow-to-monitor = true;
 
 # shadows -------------------------------------------------------------------@/
 shadow = true;

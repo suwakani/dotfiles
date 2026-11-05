@@ -29,7 +29,7 @@ local function printf(str,...)
 end
 local function execa(...)
 	local cmdstr = table.concat({...}," ")
-	os.execute(cmdstr)
+	local succ,err = os.execute(cmdstr)
 end
 local function execf(str,...)
 	execa(str:format(...))
@@ -106,7 +106,6 @@ local PALETTE_V2 = {
 		colors = {
 			border = '_FGSEL';
 			border_unsel = '#606060';
-			border_real = '#101010';
 			tab_text = '#202020';
 		};
 		misc = {
@@ -123,9 +122,8 @@ do
 	if pal.herbtheme then
 		local theme = pal.herbtheme
 		local names = {
-			border = { 'theme.active.color', 'theme.active.inner_color' };
+			border = { 'theme.active.color', 'theme.active.inner_color', 'theme.active.outer_color' };
 			border_unsel = { 'theme.normal.color', 'theme.normal.inner_color', 'theme.normal.outer_color' };
-			border_real = { 'theme.active.outer_color' };
 			border_width = { 'theme.border_width', 'theme.floating.border_width' };
 			tab_text = 'theme.tab_color';
 		}
@@ -525,7 +523,12 @@ while true do
 	do
 		local mem_cur = tonumber(popen_readFixed('free -m | awk \'/Mem:/ { printf("%3.1f%%", $3) }\''))
 		local mem_cent = (mem_cur / mem_max)
-		local text = ("%.1fG / %.1fG (%.2f%%)"):format(mem_cur/1024,mem_max/1024,mem_cent*100)
+		local text; 
+		if mem_cur < 1024 then
+			text = ("%dM / %.1fG (%.2f%%)"):format(mem_cur, mem_max/1024, mem_cent*100)
+		else
+			text = ("%.1fG / %.1fG (%.2f%%)"):format(mem_cur/1024, mem_max/1024, mem_cent*100)
+		end
 		if mem_cent >= 0.81 then
 			execa('pkill firefox -9')
 			execa('pkill Discord -9')
